@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Soal 1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/floating-labels/">
+
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="./style_1.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="form-signin">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Soal 1</h1>
+        <div class="row">
+            <div class="form-label-group col-md-8">
+                <input type="number" id="inputNumber" class="form-control" min="1" placeholder="Masukkan angka" required autofocus>
+                <label for="inputEmail">Masukkan Angka</label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block col-md-4" id="btn-submit" style="max-height:2.5em">Generate</button>
+        </div>
+        <div id="result"></div>
+
+      
+      <p class="mt-5 mb-3 text-muted text-center">&copy; Dicky Aldyanto</p>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#btn-submit").click(function(){
+                if($("#inputNumber").val() > 0){
+                    $('#result').html('');
+                    const arrValue = placeValue($("#inputNumber").val());
+                    arrValue.map(item => {
+                        $('#result').append('<div class="alert alert-secondary" role="alert">'+item+'</div>');
+                    });
+                    return false
+                }
+                alert("Harus di isi dengan angka mininum 1")
+            });
+
+            const placeValue = (num, res = [], factor = 1) => {
+                if(num){
+                    const val = (num % 10) * factor;
+                    res.unshift(val);
+                    return placeValue(Math.floor(num / 10), res, factor * 10);
+                };
+                return res;
+            };
+        });
+    </script>
+  </body>
+</html>
